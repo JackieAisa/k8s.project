@@ -1,0 +1,8 @@
+  - hosts: all
+    become: yes 
+    tasks:
+    
+    - name: Run a script on the remote nodes
+      ansible.builtin.script: /home/ubuntu/Cluster/k8s.project/script.sh  --install docker 
+      args: 
+        creates: /etc/apt/keyrings/docker.asc

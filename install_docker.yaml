@@ -7,4 +7,4 @@
       ansible.builtin.script: ~/Cluster/k8s.project/script.sh --install docker
       args:
         creates: /etc/apt/keyrings/docker.asc
-        
+

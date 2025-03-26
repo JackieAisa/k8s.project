@@ -7,9 +7,22 @@ resource "aws_key_pair" "deployer" {
   public_key = file("~/.ssh/id_rsa.pub")
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners = ["099720109477"] # Canonical
+}
+
 
 resource "aws_instance" "rke_master" {
-  ami           = "ami-0f9de6e2d2f067fca" # Amazon Linux 2 AMI
+  ami           = data.aws_ami.ubuntu.id 
   instance_type = "t2.medium"
   key_name = aws_key_pair.deployer.key_name
  
@@ -20,7 +33,7 @@ resource "aws_instance" "rke_master" {
 
 resource "aws_instance" "rke_worker" {
   count         = 2
-  ami           = "ami-0f9de6e2d2f067fca"
+  ami           = data.aws_ami.ubuntu.id 
   instance_type = "t2.medium"
   key_name      = aws_key_pair.deployer.key_name
 

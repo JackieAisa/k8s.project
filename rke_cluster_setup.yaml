@@ -1,0 +1,9 @@
+ - hosts: all
+   become: yes 
+   tasks:
+
+   - name: Copy file claster.yaml.template.j2
+     ansible.builtin.template: 
+       src: /home/ubuntu/Cluster/k8s.project/ansible/templates/claster.yaml.template.j2
+       dest: /home/ubuntu
+        

@@ -6,9 +6,9 @@ WORKER_IPS=$(terraform output -json rke_worker_ips | jq -r '.[]')
 
 # Create Ansible inventory file
 echo "[master]" > hosts
-echo "master ansible_host=${MASTER_IP}" >> hosts
+echo "${MASTER_IP}" >> hosts
 
 echo "[workers]" >> hosts
 for ip in $WORKER_IPS; do
-  echo "worker ansible_host=${ip}" >> hosts
+  echo "${ip}" >> hosts
 done

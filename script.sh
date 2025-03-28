@@ -31,5 +31,5 @@ function create_rke_user() {
 }
 
 install_docker
-# create_rke_user
+create_rke_user
                 

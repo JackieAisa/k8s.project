@@ -1,0 +1,5 @@
+- name: Copy cluster.yml
+  ansible.builtin.template:
+    src: /home/ubuntu/Cluster/k8s.project/ansible/rke_setup/templates/claster.yaml.template.j2
+    dest: /etc/cluster.yml
+    mode: '0644'
